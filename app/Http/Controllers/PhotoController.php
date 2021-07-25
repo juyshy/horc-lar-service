@@ -27,6 +27,7 @@ class PhotoController extends Controller
         $photo = new Photo;
         $photo->filePath =$filePath;
         $photo->name = $name;
+        $photo->taken = $request->taken;
         $photo->save();
         return $photo->toJson();
     }
