@@ -21,7 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('photo', PhotoController::class);
-
+ 
 /*Route::get('/photo', 'PhotoController@index')->name('photo.index');
 
 Route::post('/photo', 'PhotoController@store')->name('photo.store');

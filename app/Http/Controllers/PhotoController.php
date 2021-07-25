@@ -15,6 +15,17 @@ class PhotoController extends Controller
         return Photo::paginate($perPage,['*'],  'page',  $page);
     }
 
+    public function update(Request $request, $id) {
+ 
+        $photo=Photo::find($id); 
+        $notes = $request->notes;
+        $casetteNums = $request->casetteNums;
+        $photo->notes = $notes ;
+        $photo->casetteNums = $casetteNums ;
+        $photo->save();
+        return $photo->toJson();
+    }
+
     public function destroy($id) {
         $photo = Photo::find($id);
         $name = $photo->name;
