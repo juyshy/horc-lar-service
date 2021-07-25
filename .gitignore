@@ -16,3 +16,4 @@ yarn-error.log
 resources/kuvat/
 tomysql.sql
 mariadb_data_bu.sql
+public/js/
