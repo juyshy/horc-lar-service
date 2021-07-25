@@ -9,7 +9,10 @@ use \App\Models\Photo;
 class PhotoController extends Controller
 {
     public function index(Request $request) {
-        return Photo::all();
+        //return Photo::all();
+        $perPage= $request->get('perPage') | 50;
+        $page= $request->get('page') | 0 ;
+        return Photo::paginate($perPage,['*'],  'page',  $page);
     }
 
     public function destroy($id) {
