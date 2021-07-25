@@ -12,6 +12,13 @@ class PhotoController extends Controller
         return Photo::all();
     }
 
+    public function destroy($id) {
+        $photo = Photo::find($id);
+        $name = $photo->name;
+        $photo->delete();
+        return 'Deleted photo '.$id . ' ' . $name ;
+    }
+
     public function store(Request $request) {
         $filePath = $request->filePath;
         
