@@ -14,10 +14,14 @@ class OcrTextController extends Controller
     }
     public function show(Request $request,  $id) {
         $photo=Photo::find($id); 
-        $ocrTextFil = $photo->name . '.txt';
-        $filPath=storage_path('ocrtexts\\'.$ocrTextFil);
-        $filContents = file_get_contents($filPath);
-
-        return $filContents;
+        if($photo != null) {
+            $ocrTextFil = $photo->name . '.txt';
+            $filPath=storage_path('ocrtexts\\'.$ocrTextFil);
+            if (file_exists($filPath)) {
+                $filContents = file_get_contents($filPath);
+                return $filContents;
+            }
+    }
+        return response()->json(['message' => 'Not Found!'], 404);
     }
 }
