@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>Paper archive photo digilization</title>
-
+        <script src="https://unpkg.com/vue@next"></script>
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
@@ -13,9 +13,14 @@
  
     </head>
     <body>
-    <div id="app">
-      <layout />
-    </div>
-  </body>
-  <script src="{{ mix('/js/app.js') }}"></script>
+    <h1 id="site-heading">Welcome to {{ siteName }}</h1>
+        <script>
+            const app = Vue.createApp({
+                data() {
+                    return {
+                        siteName: 'Learn Vue LiveLessons',
+                    };
+                }
+            }).mount('#site-heading');
+        </script>
 </html>
