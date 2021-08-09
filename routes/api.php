@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PhotoController;
-use App\Http\Controllers\OcrTextController;
+use App\Http\Controllers\OcrDataController;
 use App\Models\Photo;
 
 /*
@@ -22,7 +22,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('photo', PhotoController::class);
-Route::apiResource('ocrtext', OcrTextController::class);
+Route::apiResource('ocrdata', OcrDataController::class);
 
 /*Route::get('/photo', 'PhotoController@index')->name('photo.index');
 

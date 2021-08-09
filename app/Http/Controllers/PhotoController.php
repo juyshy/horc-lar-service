@@ -15,6 +15,13 @@ class PhotoController extends Controller
         return Photo::paginate($perPage,['*'],  'page',  $page);
     }
 
+
+    public function show(Request $request,  $id) {
+        $photo=Photo::find($id); 
+ 
+        return null;
+    }
+
     public function update(Request $request, $id) {
  
         $photo=Photo::find($id); 

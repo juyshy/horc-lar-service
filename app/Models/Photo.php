@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\OcrData;
 
 class Photo extends Model
 {
@@ -19,4 +20,11 @@ class Photo extends Model
     protected $fillable = [
         'name', 'filePath','notes','casetteNums'
     ];
+
+
+    public function ocrData()
+    {
+        return $this->hasOne(OcrData::class);
+    }
+
 }

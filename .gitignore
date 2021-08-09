@@ -19,3 +19,4 @@ mariadb_data_bu.sql
 public/js/
 database/bu/
 storage/ocrtexts/
+storage/hocrs/
