@@ -19,7 +19,7 @@ class PhotoController extends Controller
     public function show(Request $request,  $id) {
         $photo=Photo::find($id); 
  
-        return null;
+        return $photo;
     }
 
     public function update(Request $request, $id) {
@@ -27,8 +27,12 @@ class PhotoController extends Controller
         $photo=Photo::find($id); 
         $notes = $request->notes;
         $casetteNums = $request->casetteNums;
-        $photo->notes = $notes ;
-        $photo->casetteNums = $casetteNums ;
+        if($notes != null) {
+            $photo->notes = $notes ;
+        }
+        if($casetteNums != null) {
+            $photo->casetteNums = $casetteNums ;
+        }
         $photo->save();
         return $photo->toJson();
     }
