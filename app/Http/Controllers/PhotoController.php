@@ -12,7 +12,8 @@ class PhotoController extends Controller
         //return Photo::all();
         $perPage= $request->get('perPage') | 50;
         $page= $request->get('page') | 0 ;
-        return Photo::paginate($perPage,['*'],  'page',  $page);
+        $paginatedPhotos= Photo::paginate($perPage,['*'],  'page',  $page);
+        return $paginatedPhotos;
     }
 
 

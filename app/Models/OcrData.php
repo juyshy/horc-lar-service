@@ -10,7 +10,7 @@ class OcrData extends Model
     use HasFactory;
 
     protected $fillable = [
-        'ocr', 'hocr','hocr_edited'
+        'ocr', 'hocr','hocr_edited','saved_selection'
     ];
     public function photo()
     {

@@ -26,12 +26,23 @@ class OcrDataController extends Controller
         $ocrData_id=$request->id;
         $ocrData =   OcrData::find($ocrData_id);
 
-       
         $hocr_edited=$request->hocr_edited;
-        
         $ocrData->hocr_edited =$hocr_edited;
  
         $ocrData->save();
         return 'saved edited horc for image '.$ocrData->id . ' ' .$hocr_edited;
+    }
+
+    
+    public function update(Request $request, $id) {
+ 
+        $ocrData=OcrData::find($id); 
+        $saved_selection = $request->saved_selection;
+    
+        if($saved_selection != null) {
+            $ocrData->saved_selection = $saved_selection ;
+        }
+        $ocrData->save();
+        return 'ocrdata updated';
     }
 }
