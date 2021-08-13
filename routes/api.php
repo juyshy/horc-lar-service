@@ -22,6 +22,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('photo', PhotoController::class);
+Route::get('/ocrdata/latest', [OcrDataController::class, 'latestSavedSelection']);
 Route::apiResource('ocrdata', OcrDataController::class);
 
 /*Route::get('/photo', 'PhotoController@index')->name('photo.index');

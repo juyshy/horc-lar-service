@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\OcrData;
 use Illuminate\Http\Request;
 use \App\Models\Photo;
+use Illuminate\Support\Facades\DB;
 
 class OcrDataController extends Controller
 {
@@ -18,6 +19,17 @@ class OcrDataController extends Controller
         }
         return response()->json(['message' => 'Not Found!'], 404);
     }
+
+    
+    
+    public function latestSavedSelection( ) {
+ 
+        $ocrDatasId= DB::table('ocr_data')->select('id', 'photo_id')->whereRaw('saved_selection is not NULL')->orderBy('id','desc')->limit(1)->get();
+        //$ocrDatas2->id
+        return $ocrDatasId   ;
+    }
+
+
     public function store(Request $request ) {
         /* $photo_id=$request->photo_id;
         $photo =   Photo::find($photo_id);
