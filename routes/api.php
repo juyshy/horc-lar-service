@@ -6,6 +6,7 @@ use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\OcrDataController;
 use App\Models\Photo;
 
+use App\Http\Controllers\AuthController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,13 +18,31 @@ use App\Models\Photo;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'auth'
+
+], function () {
+    Route::post('login', [AuthController::class, 'login']);
+    Route::post('register', [AuthController::class, 'register']);
+    Route::post('logout', [AuthController::class, 'logout']);
+    Route::post('refresh', [AuthController::class, 'refresh']);
+    Route::get('user-profile', [AuthController::class, 'userProfile']);
 });
 
-Route::apiResource('photo', PhotoController::class);
-Route::get('/ocrdata/latest', [OcrDataController::class, 'latestSavedSelection']);
-Route::apiResource('ocrdata', OcrDataController::class);
+
+Route::group(['middleware' => ['api']], function() {
+ 
+    Route::apiResource('photo', PhotoController::class);
+    Route::get('/ocrdata/latest', [OcrDataController::class, 'latestSavedSelection']);
+    Route::apiResource('ocrdata', OcrDataController::class);
+});
+
+/* Route::middleware('auth:api')->get('/user', function (Request $request) {
+    return $request->user();
+});
+ */
 
 /*Route::get('/photo', 'PhotoController@index')->name('photo.index');
 
