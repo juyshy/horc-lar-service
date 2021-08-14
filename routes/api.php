@@ -29,30 +29,17 @@ Route::group([
     Route::post('logout', [AuthController::class, 'logout']);
     Route::post('refresh', [AuthController::class, 'refresh']);
     Route::get('user-profile', [AuthController::class, 'userProfile']);
+    
 });
 
+Route::apiResource('photo', PhotoController::class);
+Route::get('/ocrdata/latest', [OcrDataController::class, 'latestSavedSelection']);
+Route::apiResource('ocrdata', OcrDataController::class);
 
-Route::group(['middleware' => ['api']], function() {
- 
-    Route::apiResource('photo', PhotoController::class);
-    Route::get('/ocrdata/latest', [OcrDataController::class, 'latestSavedSelection']);
-    Route::apiResource('ocrdata', OcrDataController::class);
-});
 
 /* Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
  */
 
-/*Route::get('/photo', 'PhotoController@index')->name('photo.index');
-
-Route::post('/photo', 'PhotoController@store')->name('photo.store');
-Route::get('/photo/{id}/comment', 'CommentController@index')->name('comment.index');
-Route::post('/photo/{id}/comment', 'CommentController@add')->name('comment.add');
-Route::get('/chat', 'ChatController@index')->name('chat.index');
-Route::post('/chat', 'ChatController@add')->name('chat.add');
- */
-
- Route::get('/photos', function(){
-     return Photo::all();
- });
+ 

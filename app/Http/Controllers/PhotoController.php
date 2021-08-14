@@ -8,6 +8,12 @@ use \App\Models\Photo;
 
 class PhotoController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:api' );
+    }
+    
     public function index(Request $request) {
         //return Photo::all();
         $perPage= $request->get('perPage') | 50;

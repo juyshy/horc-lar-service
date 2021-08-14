@@ -9,7 +9,11 @@ use Illuminate\Support\Facades\DB;
 
 class OcrDataController extends Controller
 {
-    
+    public function __construct()
+    {
+        $this->middleware('auth:api' );
+    }
+
     public function show(Request $request,  $id) {
         $photo=Photo::find($id); 
         $ocrData = $photo->ocrData ;
