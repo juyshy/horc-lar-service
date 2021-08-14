@@ -44,7 +44,8 @@ class OcrDataController extends Controller
 
         $hocr_edited=$request->hocr_edited;
         $ocrData->hocr_edited =$hocr_edited;
- 
+        $user_id = $request->user_id;
+        $ocrData->user_id = $user_id ;
         $ocrData->save();
         return 'saved edited horc for image '.$ocrData->id . ' ' .$hocr_edited;
     }
@@ -54,11 +55,15 @@ class OcrDataController extends Controller
  
         $ocrData=OcrData::find($id); 
         $saved_selection = $request->saved_selection;
+        $user_id = $request->user_id;
     
         if($saved_selection != null) {
             $ocrData->saved_selection = $saved_selection ;
+            $ocrData->user_id = $user_id ;
+            $ocrData->save();
+            return 'ocrdata updated';
         }
-        $ocrData->save();
-        return 'ocrdata updated';
+        
+        return 'nothing to update';
     }
 }

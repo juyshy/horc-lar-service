@@ -34,6 +34,10 @@ class PhotoController extends Controller
         $photo=Photo::find($id); 
         $notes = $request->notes;
         $casetteNums = $request->casetteNums;
+
+        $user_id = $request->user_id;
+        $photo->user_id = $user_id ;
+
         if($notes != null) {
             $photo->notes = $notes ;
         }
