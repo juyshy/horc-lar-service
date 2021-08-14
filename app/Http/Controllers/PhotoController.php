@@ -36,7 +36,9 @@ class PhotoController extends Controller
         $casetteNums = $request->casetteNums;
 
         $user_id = $request->user_id;
+        $pagenum = $request->pagenum;
         $photo->user_id = $user_id ;
+        $photo->pagenum = $pagenum ;
 
         if($notes != null) {
             $photo->notes = $notes ;
