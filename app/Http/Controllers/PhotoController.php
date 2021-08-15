@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \App\Models\Photo;
-
+use Illuminate\Support\Facades\DB;
 
 class PhotoController extends Controller
 {
@@ -28,6 +28,14 @@ class PhotoController extends Controller
  
         return $photo;
     }
+    public function missingMetaDataPhotos( ) {
+ 
+        $photoids= DB::table('photos')->select('id' )->whereRaw('casetteNums IS NULL OR pagenum IS NULL OR (pagenum > 1 AND pageOne IS NULL)')->get();
+ 
+        return $photoids   ;
+    }
+
+    //SELECT p.* FROM photos p WHERE casetteNums IS NULL OR pagenum IS NULL OR (pagenum > 1 AND pageOne IS NULL)
 
     public function update(Request $request, $id) {
  

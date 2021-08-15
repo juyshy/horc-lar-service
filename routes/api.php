@@ -25,15 +25,21 @@ Route::group([
 
 ], function () {
     Route::post('login', [AuthController::class, 'login']);
-    //Route::post('register', [AuthController::class, 'register']);
+    $val = config('app.env');
+    if ($val == 'local') {
+        Route::post('register', [AuthController::class, 'register']);
+    }
     Route::post('logout', [AuthController::class, 'logout']);
     Route::post('refresh', [AuthController::class, 'refresh']);
     Route::get('user-profile', [AuthController::class, 'userProfile']);
     
 });
-
+Route::get('/photo/missingdata', [PhotoController::class, 'missingMetaDataPhotos']);
 Route::apiResource('photo', PhotoController::class);
+
 Route::get('/ocrdata/latest', [OcrDataController::class, 'latestSavedSelection']);
+Route::get('/ocrdata/nosavedselection', [OcrDataController::class, 'noSavedSelection']);
+
 Route::apiResource('ocrdata', OcrDataController::class);
 
 

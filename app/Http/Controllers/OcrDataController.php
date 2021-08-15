@@ -32,6 +32,11 @@ class OcrDataController extends Controller
         //$ocrDatas2->id
         return $ocrDatasId   ;
     }
+    
+    public function noSavedSelection( ) {
+        $ocrDatasId= DB::table('ocr_data')->select('id', 'photo_id')->whereRaw('saved_selection is NULL')->get();
+        return $ocrDatasId   ;
+    }
 
 
     public function store(Request $request ) {
