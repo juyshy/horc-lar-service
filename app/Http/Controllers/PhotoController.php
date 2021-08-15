@@ -32,14 +32,23 @@ class PhotoController extends Controller
     public function update(Request $request, $id) {
  
         $photo=Photo::find($id); 
+
         $notes = $request->notes;
         $casetteNums = $request->casetteNums;
+        $pagenum = $request->pagenum;
+        $pageOne = $request->pageOne;
 
         $user_id = $request->user_id;
-        $pagenum = $request->pagenum;
         $photo->user_id = $user_id ;
-        $photo->pagenum = $pagenum ;
-
+        
+        if($pagenum != null) {
+            $photo->pagenum = $pagenum ;
+        }
+ 
+        if($pageOne != null) {
+            $photo->pageOne = $pageOne ;
+        }
+ 
         if($notes != null) {
             $photo->notes = $notes ;
         }
