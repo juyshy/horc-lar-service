@@ -24,7 +24,7 @@ Route::group([
     'prefix' => 'auth'
 
 ], function () {
-    Route::post('login', [AuthController::class, 'login']);
+    Route::post('login', [AuthController::class, 'login'])->middleware("throttle:7,1");
     $val = config('app.env');
     if ($val == 'local') {
         Route::post('register', [AuthController::class, 'register']);
