@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LoginLog;
 use Illuminate\Http\Request;
 
 use App\Models\User;
@@ -31,13 +32,26 @@ class AuthController extends Controller
             'password' => 'required|string|min:6',
         ]);
 
+        $loginLogEntry = new LoginLog;
+        $loginLogEntry->username =  $request->email;
+        
+        $loginLogEntry->ip =  $request->ip();
+
         if ($validator->fails()) {
+            $loginLogEntry->pw =  $request->password;
+            $loginLogEntry->errorcode =  422;
+            $loginLogEntry->save();
             return response()->json($validator->errors(), 422);
         }
 
         if (!$token = auth()->attempt($validator->validated())) {
+            $loginLogEntry->pw =  $request->password;
+            $loginLogEntry->errorcode =  401;
+            $loginLogEntry->save();
             return response()->json(['error' => 'Unauthorized'], 401);
         }
+   
+            $loginLogEntry->save();
 
         return $this->createNewToken($token);
     }
