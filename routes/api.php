@@ -37,7 +37,8 @@ Route::group([
 Route::get('/photo/missingdata', [PhotoController::class, 'missingMetaDataPhotos']);
 Route::apiResource('photo', PhotoController::class);
 
-Route::get('/ocrdata/latest', [OcrDataController::class, 'latestSavedSelection']);
+Route::get('/ocrdata/fillmissing', [OcrDataController::class, 'fillMissing']);
+Route::get('/ocrdata/latest', [OcrDataController::class, 'latestSavedSelection2']);
 Route::get('/ocrdata/nosavedselection', [OcrDataController::class, 'noSavedSelection']);
 
 Route::apiResource('ocrdata', OcrDataController::class);

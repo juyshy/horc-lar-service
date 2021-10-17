@@ -26,7 +26,7 @@ class OcrDataController extends Controller
 
     
     
-    public function latestSavedSelection( ) {
+    public function latestSavedSelection2( ) {
  
         $ocrDatasId= DB::table('ocr_data')->select('id', 'photo_id')->whereRaw('saved_selection is not NULL')->orderBy('id','desc')->limit(1)->get();
         //$ocrDatas2->id
@@ -38,6 +38,10 @@ class OcrDataController extends Controller
         return $ocrDatasId   ;
     }
 
+    public function fillMissing() {
+ 
+        return   $this->fillAllHocrs();
+    }
 
     public function store(Request $request ) {
         /* $photo_id=$request->photo_id;
@@ -70,5 +74,80 @@ class OcrDataController extends Controller
         }
         
         return 'nothing to update';
+    }
+    
+
+
+    public function saveHocr($id){
+        $ocrData = new OcrData;
+        $ocrData->hocr = $this->fillOcrData2Db($id );
+        $ocrData->photo_id = $id;
+        $ocrData->ocr = $this->getOcrTextFromPhotoId($id );
+        $ocrData->save();
+    }
+
+    public function fillAllHocrs(){
+
+        $ocrDatas=OcrData::all()->toArray();
+        $photos=Photo::all()->toArray();
+        $start =35;
+        $ocrDatasLen= count($ocrDatas);
+        $photosLen= count($photos);
+        $getId = function($photo) {
+            return $photo['id'];
+        };
+        $getPhotoId = function($ocrData) {
+            return $ocrData['photo_id'];
+        };
+        $photoIds= array_map($getId,$photos);
+        $ocrDatasIds= array_map($getPhotoId,$ocrDatas);
+        $missingHorcPhotoIds= array_diff( $photoIds,$ocrDatasIds);
+        $missingHorcPhotoIdsCount=count($missingHorcPhotoIds);
+        foreach($missingHorcPhotoIds as $photoId) {
+                $this->saveHocr($photoId);
+        }; 
+        return   'photos '. $photosLen . ' ocrs: '. $ocrDatasLen .' ';
+    }
+
+    public function fillOcrData2Db($id){
+        $photo=Photo::find($id); 
+        if($photo != null) {
+            $filContents = $this->getHOcr( $photo);
+            return   $filContents;  
+        }
+        return response()->json(['message' => 'Not Found!'], 404);
+    }
+
+    public function getHOcr(Photo $photo){
+        if($photo != null) {
+            $ocrTextFil = $photo->name . '.hocr';
+            $filPath=storage_path('hocrs\\'.$ocrTextFil);
+            if (file_exists($filPath)) {
+                $filContents = file_get_contents($filPath);
+                return $filContents;
+            }
+         }
+         return null;
+    }
+
+    public function getOcrText(Photo $photo){
+        if($photo != null) {
+            $ocrTextFil = $photo->name . '.txt';
+            $filPath=storage_path('ocrtexts\\'.$ocrTextFil);
+            if (file_exists($filPath)) {
+                $filContents = file_get_contents($filPath);
+                return $filContents;
+            }
+         }
+         return null;
+    }
+    public function getOcrTextFromPhotoId($id)
+    {
+        $photo = Photo::find($id);
+        if ($photo != null) {
+            $filContents = $this->getOcrText($photo);
+            return $filContents;
+        }
+        return null;
     }
 }
