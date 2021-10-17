@@ -41,6 +41,7 @@ Route::get('/ocrdata/latest', [OcrDataController::class, 'latestSavedSelection']
 Route::get('/ocrdata/nosavedselection', [OcrDataController::class, 'noSavedSelection']);
 
 Route::apiResource('ocrdata', OcrDataController::class);
+Route::apiResource('cassette', CassetteController::class);      
 
 
 /* Route::middleware('auth:api')->get('/user', function (Request $request) {
