@@ -106,7 +106,7 @@ class OcrDataController extends Controller
         foreach($missingHorcPhotoIds as $photoId) {
                 $this->saveHocr($photoId);
         }; 
-        return   'photos '. $photosLen . ' ocrs: '. $ocrDatasLen .' ';
+        return   'photos '. $photosLen . ' ocrs: '. $ocrDatasLen .' ' . 'missingHorcs: '. $missingHorcPhotoIdsCount;
     }
 
     public function fillOcrData2Db($id){
