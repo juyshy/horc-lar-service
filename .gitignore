@@ -21,3 +21,4 @@ database/bu/
 storage/ocrtexts/
 storage/hocrs/
 db-snapshot.sql
+.env.*

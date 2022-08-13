@@ -34,6 +34,12 @@ class PhotoController extends Controller
  
         return $photoids   ;
     }
+    public function missingAllMetaDataPhotos( ) {
+ 
+        $photoids= DB::table('photos')->select('id' )->whereRaw('casetteNums IS NULL AND pagenum IS NULL  AND pageOne IS NULL AND  notes IS NULL' )->get();
+ 
+        return $photoids   ;
+    }
 
     //SELECT p.* FROM photos p WHERE casetteNums IS NULL OR pagenum IS NULL OR (pagenum > 1 AND pageOne IS NULL)
 

@@ -35,6 +35,7 @@ Route::group([
     
 });
 Route::get('/photo/missingdata', [PhotoController::class, 'missingMetaDataPhotos']);
+Route::get('/photo/missingAllMetadata', [PhotoController::class, 'missingAllMetaDataPhotos']);
 Route::apiResource('photo', PhotoController::class);
 
 Route::get('/ocrdata/fillmissing', [OcrDataController::class, 'fillMissing']);
