@@ -1,7 +1,7 @@
  
 ## Horc service 
 
-Laravel application for serving ocr proofreading data with horc format.
+Laravel application for serving ocr proofreading data with hocr format.
 
  
  
