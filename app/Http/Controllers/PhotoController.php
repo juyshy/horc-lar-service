@@ -55,14 +55,9 @@ class PhotoController extends Controller
         $user_id = $request->user_id;
         $photo->user_id = $user_id ;
         
-        if($pagenum != null) {
-            $photo->pagenum = $pagenum ;
-        }
- 
-        if($pageOne != null) {
-            $photo->pageOne = $pageOne ;
-        }
- 
+        $photo->pagenum = $pagenum ;
+        $photo->pageOne = $pageOne ;
+
         if($notes != null) {
             $photo->notes = $notes ;
         }

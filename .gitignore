@@ -22,3 +22,5 @@ storage/ocrtexts/
 storage/hocrs/
 db-snapshot.sql
 .env.*
+testicon.php
+phpinfo.php 
